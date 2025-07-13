@@ -1,0 +1,16 @@
+product_id,name,category,price,material,recycled_content,packaging,lifecycle,recyclability,popularity,image,carbonFootprint,decompositionTime
+1,Disposable Plastic Cups,Kitchen,8.99,non_biodegradable,none,plastic,disposable,no,50,/placeholder.svg?height=200&width=200,2.5,500 years
+2,Cotton Reusable Bags,Household,6.49,fully_biodegradable,high,compostable,reusable,yes,90,/placeholder.svg?height=200&width=200,0.8,90 days
+3,Great Value Water Bottles,Household,3.98,non_biodegradable,none,plastic,disposable,no,60,/placeholder.svg?height=200&width=200,1.8,450 years
+4,Reusable Glass Bottles,Household,9.25,non_biodegradable,high,compostable,reusable,yes,85,/placeholder.svg?height=200&width=200,1.0,indefinite
+5,Bounty Paper Towels,Kitchen,8.74,fully_biodegradable,low,compostable,disposable,yes,70,/placeholder.svg?height=200&width=200,1.2,60 days
+6,Bamboo Fiber Cups,Kitchen,12.99,fully_biodegradable,high,compostable,disposable,yes,80,/placeholder.svg?height=200&width=200,0.8,90 days
+7,Plastic Straws,Kitchen,1.24,non_biodegradable,none,plastic,disposable,no,45,/placeholder.svg?height=200&width=200,1.5,400 years
+8,Metal Straws,Kitchen,7.99,non_biodegradable,none,compostable,reusable,yes,90,/placeholder.svg?height=200&width=200,0.5,indefinite
+9,Chemical Detergent,Kitchen,5.99,non_biodegradable,none,plastic,disposable,no,55,/placeholder.svg?height=200&width=200,2.0,200 years
+10,Natural Detergent,Kitchen,8.99,fully_biodegradable,high,compostable,reusable,yes,75,/placeholder.svg?height=200&width=200,0.9,90 days
+11,Bamboo Toothbrushes,Kitchen,3.99,fully_biodegradable,high,compostable,reusable,yes,95,/placeholder.svg?height=200&width=200,0.7,120 days
+12,Plastic Food Container,Kitchen,5.99,non_biodegradable,none,plastic,disposable,no,40,/placeholder.svg?height=200&width=200,1.9,450 years
+13,Reusable Silicone Bags,Kitchen,10.99,non_biodegradable,high,compostable,reusable,yes,85,/placeholder.svg?height=200&width=200,1.1,indefinite
+14,Recycled Paper Cups,Kitchen,10.49,fully_biodegradable,high,compostable,disposable,yes,65,/placeholder.svg?height=200&width=200,1.2,60 days
+15,Reusable Beeswax Wraps,Household,7.89,fully_biodegradable,high,compostable,reusable,yes,88,/placeholder.svg?height=200&width=200,0.6,90 days

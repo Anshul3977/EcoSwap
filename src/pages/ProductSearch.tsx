@@ -1,157 +1,128 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Search, ShoppingCart, User, Mic, Shuffle, Filter, Star, Leaf, Award } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { Separator } from '@/components/ui/separator'
-import { Link } from 'react-router-dom'
-import { useToast } from '@/hooks/use-toast'
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, ShoppingCart, User, Mic, Shuffle, Filter, Star, Leaf, Award } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
+import { Link } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
 
 interface Product {
-  id: string
-  name: string
-  brand?: string
-  price: number
-  image: string
-  sustainabilityScore: number
-  greenCredits: number
-  ecoBenefits: string[]
-  carbonFootprint: number
-  decompositionTime: string
-  recyclability: number
+  id: string;
+  name: string;
+  brand?: string;
+  price: number;
+  image: string;
+  sustainabilityScore: number;
+  greenCredits: number;
+  ecoBenefits: string[];
+  carbonFootprint: number;
+  decompositionTime: string;
+  recyclability: number;
 }
 
 interface OriginalProduct {
-  id: string
-  name: string
-  price: number
-  image: string
-  environmentalScore: number
-  concerns: string[]
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  environmentalScore: number;
+  concerns: string[];
 }
-
-// Mock data for demonstration
-const mockOriginalProduct: OriginalProduct = {
-  id: 'plastic-cups',
-  name: 'Disposable Plastic Cups (50 pack)',
-  price: 8.99,
-  image: '/placeholder.svg?height=200&width=200',
-  environmentalScore: 2,
-  concerns: ['Non-biodegradable', 'Ocean pollution', 'Microplastics', 'Petroleum-based']
-}
-
-const mockAlternatives: Product[] = [
-  {
-    id: 'bamboo-cups',
-    name: 'Bamboo Fiber Cups (50 pack)',
-    brand: 'EcoWare',
-    price: 12.99,
-    image: '/placeholder.svg?height=200&width=200',
-    sustainabilityScore: 9,
-    greenCredits: 25,
-    ecoBenefits: ['Biodegradable', 'Renewable bamboo', 'Compostable', 'Chemical-free'],
-    carbonFootprint: 0.8,
-    decompositionTime: '90 days',
-    recyclability: 95
-  },
-  {
-    id: 'paper-cups',
-    name: 'Recycled Paper Cups (50 pack)',
-    brand: 'GreenChoice',
-    price: 10.49,
-    image: '/placeholder.svg?height=200&width=200',
-    sustainabilityScore: 8,
-    greenCredits: 20,
-    ecoBenefits: ['Recyclable', 'Post-consumer content', 'Forest Stewardship Council certified'],
-    carbonFootprint: 1.2,
-    decompositionTime: '60 days',
-    recyclability: 90
-  }
-]
 
 const trendingSwaps = [
-  'Plastic bags → Reusable cotton bags',
-  'Paper towels → Bamboo towels',
-  'Plastic straws → Metal straws',
-  'Chemical detergent → Natural detergent'
-]
+  'Disposable paper plates → Reusable bamboo plates',
+  'Plastic toothbrushes → Bamboo toothbrushes',
+  'Plastic food containers → Glass containers',
+  'Plastic straws → Metal straws'
+];
 
 const categories = [
   { name: 'Kitchen', icon: '🍽️' },
   { name: 'Personal Care', icon: '🧴' },
   { name: 'Home', icon: '🏠' },
   { name: 'Office', icon: '📎' }
-]
+];
 
-const typingWords = ['plastic cups', 'paper towels', 'detergent', 'shampoo', 'cleaning supplies']
+const typingWords = ['disposable paper plates', 'plastic toothbrushes', 'plastic food containers', 'plastic cups', 'cleaning supplies'];
 
 export default function ProductSearch() {
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<{ original: OriginalProduct | null; alternatives: Product[] }>({
     original: null,
     alternatives: []
-  })
-  const [greenCredits, setGreenCredits] = useState(150)
-  const [cartItems, setCartItems] = useState(0)
-  const [isSearching, setIsSearching] = useState(false)
-  const [currentTypingWord, setCurrentTypingWord] = useState(0)
-  const [displayedText, setDisplayedText] = useState('')
-  const [isTyping, setIsTyping] = useState(true)
-  const { toast } = useToast()
+  });
+  const [greenCredits, setGreenCredits] = useState(150);
+  const [cartItems, setCartItems] = useState(0);
+  const [isSearching, setIsSearching] = useState(false);
+  const [currentTypingWord, setCurrentTypingWord] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const { toast } = useToast();
 
-  // Typing animation effect
   useEffect(() => {
-    if (!isTyping) return
+    if (!isTyping) return;
 
-    const currentWord = typingWords[currentTypingWord]
-    const isDeleting = displayedText.length > currentWord.length
+    const currentWord = typingWords[currentTypingWord];
+    const isDeleting = displayedText.length > currentWord.length;
 
     const timeout = setTimeout(() => {
       if (isDeleting) {
-        setDisplayedText(currentWord.substring(0, displayedText.length - 1))
+        setDisplayedText(currentWord.substring(0, displayedText.length - 1));
       } else {
-        setDisplayedText(currentWord.substring(0, displayedText.length + 1))
+        setDisplayedText(currentWord.substring(0, displayedText.length + 1));
       }
 
       if (!isDeleting && displayedText === currentWord) {
-        setTimeout(() => setIsTyping(true), 1500)
-        setCurrentTypingWord((prev) => (prev + 1) % typingWords.length)
+        setTimeout(() => setIsTyping(true), 1500);
+        setCurrentTypingWord((prev) => (prev + 1) % typingWords.length);
       }
-    }, isDeleting ? 50 : 100)
+    }, isDeleting ? 50 : 100);
 
-    return () => clearTimeout(timeout)
-  }, [displayedText, currentTypingWord, isTyping])
+    return () => clearTimeout(timeout);
+  }, [displayedText, currentTypingWord, isTyping]);
 
   const handleSearch = async () => {
-    if (!searchQuery.trim()) return
-    
-    setIsSearching(true)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    setSearchResults({
-      original: mockOriginalProduct,
-      alternatives: mockAlternatives
-    })
-    setIsSearching(false)
-  }
+    if (!searchQuery.trim()) return;
+
+    setIsSearching(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: searchQuery })
+      });
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+      setSearchResults(data);
+      setGreenCredits(data.totalCredits);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Could not find any products. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   const handleSwap = (product: Product) => {
-    setGreenCredits(prev => prev + product.greenCredits)
-    setCartItems(prev => prev + 1)
+    setGreenCredits((prev) => prev + product.greenCredits);
+    setCartItems((prev) => prev + 1);
     toast({
-      title: "Great choice! 🌱",
+      title: 'Great choice! 🌱',
       description: `You earned ${product.greenCredits} Green Credits!`,
-    })
-  }
+    });
+  };
 
   const ProductCard = ({ product, isOriginal = false }: { product: Product | OriginalProduct, isOriginal?: boolean }) => {
     if (isOriginal) {
-      const original = product as OriginalProduct
+      const original = product as OriginalProduct;
       return (
         <Card className="overflow-hidden border-destructive/20">
           <CardContent className="p-6">
@@ -162,7 +133,7 @@ export default function ProductSearch() {
               </Badge>
             </div>
             <h3 className="font-semibold text-lg mb-2">{original.name}</h3>
-            <p className="text-2xl font-bold text-primary mb-4">${original.price}</p>
+            <p className="text-2xl font-bold text-primary mb-4">${original.price.toFixed(2)}</p>
             <div className="space-y-2">
               <p className="text-sm font-medium text-destructive">Environmental Concerns:</p>
               <div className="flex flex-wrap gap-1">
@@ -175,14 +146,15 @@ export default function ProductSearch() {
             </div>
           </CardContent>
         </Card>
-      )
+      );
     }
 
-    const eco = product as Product
+    const eco = product as Product;
     return (
       <motion.div
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
       >
         <Card className="overflow-hidden border-primary/20 hover:border-primary/40 transition-colors">
           <CardContent className="p-6">
@@ -196,7 +168,7 @@ export default function ProductSearch() {
             {eco.brand && <p className="text-muted-foreground text-sm mb-2">{eco.brand}</p>}
             
             <div className="flex items-center justify-between mb-3">
-              <p className="text-2xl font-bold text-primary">${eco.price}</p>
+              <p className="text-2xl font-bold text-primary">${eco.price.toFixed(2)}</p>
               <div className="flex items-center gap-1 text-primary">
                 <Award className="w-4 h-4" />
                 <span className="font-medium">+{eco.greenCredits} credits</span>
@@ -236,8 +208,8 @@ export default function ProductSearch() {
           </CardContent>
         </Card>
       </motion.div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -405,5 +377,5 @@ export default function ProductSearch() {
         </AnimatePresence>
       </main>
     </div>
-  )
+  );
 }
