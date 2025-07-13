@@ -131,9 +131,10 @@ export function HowItWorksSection() {
     {
       number: "02",
       title: "Get Recommendations",
-      description: "Our AI suggests eco-friendly alternatives for your items",
+      description: "Discover eco-friendly alternatives for your items",
       icon: "🌱"
     },
+
     {
       number: "03",
       title: "Make the Swap",

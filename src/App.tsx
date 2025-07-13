@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import ProductSearch from "./pages/ProductSearch";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
-
+import WalmartCart from "./pages/WalmartCart";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -20,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/search" element={<ProductSearch />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/walmart-cart" element={<WalmartCart />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

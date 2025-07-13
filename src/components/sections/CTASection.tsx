@@ -58,8 +58,8 @@ export function CTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Be part of the change. Start making sustainable choices today 
-          and help us build a better tomorrow for our planet.
+          Your choices matter. Transform your shopping habits today 
+          and become the eco-hero our planet needs.
         </motion.p>
 
         {/* Action Buttons */}
